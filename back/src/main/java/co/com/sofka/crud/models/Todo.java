@@ -1,8 +1,9 @@
-package co.com.sofka.crud;
+package co.com.sofka.crud.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Todo {
@@ -12,6 +13,9 @@ public class Todo {
     private String name;
     private boolean completed;
     private String groupListId;
+    @ManyToOne
+    private Tabla tabla;
+
 
     public String getGroupListId() {
         return groupListId;
@@ -43,5 +47,13 @@ public class Todo {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public Tabla getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(Tabla tabla) {
+        this.tabla = tabla;
     }
 }
