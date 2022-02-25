@@ -1,10 +1,12 @@
 import React, { useContext, useRef, useState,createContext } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Table,Buttom } from 'reactstrap';
 const HOST_API = "http://localhost:8080/api";
 const SuperForm = ({Store}) => {
     
     const formRef = useRef(null);
-    const { dispatch, state: { todo } } = useContext(Store);
-    const item = todo.item;
+    const { dispatch, state: { tabla } } = useContext(Store);
+    const item = tabla.item;
     const [state, setState] = useState(item);
   
     const onAdd = (event) => {
@@ -17,7 +19,7 @@ const SuperForm = ({Store}) => {
       };
   
   
-      fetch(HOST_API + "/todo", {
+      fetch(HOST_API + "/tabla", {
         method: "POST",
         body: JSON.stringify(request),
         headers: {
@@ -25,8 +27,8 @@ const SuperForm = ({Store}) => {
         }
       })
         .then(response => response.json())
-        .then((todo) => {
-          dispatch({ type: "add-item", item: todo });
+        .then((tabla) => {
+          dispatch({ type: "add-item", item: tabla });
           setState({ name: "" });
           formRef.current.reset();
         });
@@ -42,7 +44,7 @@ const SuperForm = ({Store}) => {
       };
   
   
-      fetch(HOST_API + "/todo", {
+      fetch(HOST_API + "/tabla", {
         method: "PUT",
         body: JSON.stringify(request),
         headers: {
@@ -50,8 +52,8 @@ const SuperForm = ({Store}) => {
         }
       })
         .then(response => response.json())
-        .then((todo) => {
-          dispatch({ type: "update-item", item: todo });
+        .then((tabla) => {
+          dispatch({ type: "update-item", item: tabla });
           setState({ name: "" });
           formRef.current.reset();
         });
@@ -67,8 +69,7 @@ const SuperForm = ({Store}) => {
         onChange={(event) => {
           setState({ ...state, name: event.target.value })
         }}  ></input>
-      {item.id && <button onClick={onEdit}>Actualizar</button>}
-      {!item.id && <button onClick={onAdd}>Crear</button>}
+      {!item.id && <button onClick={onAdd} className = "bg-success">Crear</button>}
     </form>
   }
 

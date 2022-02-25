@@ -1,9 +1,7 @@
 package co.com.sofka.crud.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Tabla {
@@ -12,6 +10,10 @@ public class Tabla {
     @GeneratedValue
     private Long id;
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "todo_id")
+    private Todo todo;
 
     public Tabla() {
     }

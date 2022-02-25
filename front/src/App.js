@@ -2,11 +2,13 @@ import React ,{createContext,useReducer,useRef,useContext,useState} from 'react'
 import Form from './components/Form';
 import List from './components/List';
 import SuperForm from './components/SuperForm';
-
+import SuperList from './components/SuperList';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Table,Buttom } from 'reactstrap';
 const HOST_API = "http://localhost:8080/api";
 
 const initialState = {
-  todo: { list: [], item: {} }
+  tabla: { list: [], item: {} }
 };
 const Store = createContext(initialState)
 
@@ -15,35 +17,35 @@ const Store = createContext(initialState)
 function reducer(state, action) {
   switch (action.type) {
     case 'update-item':
-      const todoUpItem = state.todo;
-      const listUpdateEdit = todoUpItem.list.map((item) => {
+      const tablaUpItem = state.tabla;
+      const listUpdateEdit = tablaUpItem.list.map((item) => {
         if (item.id === action.item.id) {
           return action.item;
         }
         return item;
       });
-      todoUpItem.list = listUpdateEdit;
-      todoUpItem.item = {};
-      return { ...state, todo: todoUpItem }
+      tablaUpItem.list = listUpdateEdit;
+      tablaUpItem.item = {};
+      return { ...state, tabla: tablaUpItem }
     case 'delete-item':
-      const todoUpDelete = state.todo;
-      const listUpdate = todoUpDelete.list.filter((item) => {
+      const tablaUpDelete = state.tabla;
+      const listUpdate = tablaUpDelete.list.filter((item) => {
         return item.id !== action.id;
       });
-      todoUpDelete.list = listUpdate;
-      return { ...state, todo: todoUpDelete }
+      tablaUpDelete.list = listUpdate;
+      return { ...state, tabla: tablaUpDelete }
     case 'update-list':
-      const todoUpList = state.todo;
-      todoUpList.list = action.list;
-      return { ...state, todo: todoUpList }
+      const tablaUpList = state.tabla;
+      tablaUpList.list = action.list;
+      return { ...state, tabla: tablaUpList }
     case 'edit-item':
-      const todoUpEdit = state.todo;
-      todoUpEdit.item = action.item;
-      return { ...state, todo: todoUpEdit }
+      const tablaUpEdit = state.tabla;
+      tablaUpEdit.item = action.item;
+      return { ...state, tabla: tablaUpEdit }
     case 'add-item':
-      const todoUp = state.todo.list;
-      todoUp.push(action.item);
-      return { ...state, todo: {list: todoUp, item: {}} }
+      const tablaUp = state.tabla.list;
+      tablaUp.push(action.item);
+      return { ...state, tabla: {list: tablaUp, item: {}} }
     default:
       return state;
   }
@@ -57,13 +59,12 @@ const StoreProvider = ({ children }) => {
   
   }
 function App () {
-  return <StoreProvider>
-    <h3>To-Do List</h3>
-      <SuperForm Store= {Store} HOST_API= {HOST_API}/>
-      <Form Store= {Store} HOST_API= {HOST_API}/>
-      <List Store= {Store} HOST_API= {HOST_API}/>
-
+  return <StoreProvider >
+    <h3 className="text-center bg-info">To-Do List</h3>
+    <center><SuperForm Store= {Store} HOST_API= {HOST_API} /></center>
+      <SuperList Store= {Store} HOST_API= {HOST_API} />
   </StoreProvider>
+  
 }
 
 export default App;

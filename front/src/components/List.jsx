@@ -1,6 +1,8 @@
 import React, { useContext,  useEffect, createContext } from 'react';
 const HOST_API = "http://localhost:8080/api";
 
+
+
 const List = ({Store}) => {
 
     
@@ -11,7 +13,7 @@ const List = ({Store}) => {
       fetch(HOST_API + "/todos")
         .then(response => response.json())
         .then((list) => {
-          dispatch({ type: "update-list", list })
+          dispatch([{ type: "update-list", list }])
         })
     }, [dispatch]);
   
@@ -51,7 +53,7 @@ const List = ({Store}) => {
       textDecoration: 'line-through'
     };
     return <div>
-      <table >
+      <table className="table table-hover" >
         <thead>
           <tr>
             <td>ID</td>
@@ -65,7 +67,7 @@ const List = ({Store}) => {
               <td>{todo.id}</td>
               <td>{todo.name}</td>
               <td><input type="checkbox" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input></td>
-              <td><button onClick={() => onDelete(todo.id)}>Eliminar</button></td>
+              <td><button onClick={() => onDelete(todo.id)} className = "bg-danger">Eliminar</button></td>
               <td><button onClick={() => onEdit(todo)}>Editar</button></td>
             </tr>
           })}

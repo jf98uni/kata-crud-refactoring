@@ -36,6 +36,7 @@ public class TablasController {
 
     @DeleteMapping(value = "api/{id}/tabla")
     public void delete(@PathVariable("id")Long id){
+
         service.delete(id);
     }
 

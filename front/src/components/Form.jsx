@@ -1,4 +1,7 @@
 import React, { useContext, useRef, useState,createContext } from 'react';
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Table,Buttom } from 'reactstrap';
 const HOST_API = "http://localhost:8080/api";
 const Form = ({Store}) => {
     
@@ -68,7 +71,7 @@ const Form = ({Store}) => {
           setState({ ...state, name: event.target.value })
         }}  ></input>
       {item.id && <button onClick={onEdit}>Actualizar</button>}
-      {!item.id && <button onClick={onAdd}>Crear</button>}
+      {!item.id && <button onClick={onAdd} className = "bg-success">Crear</button>}
     </form>
   }
 
