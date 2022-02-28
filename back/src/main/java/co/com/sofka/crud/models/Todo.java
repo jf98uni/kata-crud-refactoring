@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Todo {
     @Id
@@ -12,17 +13,17 @@ public class Todo {
     private Long id;
     private String name;
     private boolean completed;
-    private String groupListId;
+
     @ManyToOne
     private Tabla tabla;
 
-
-    public String getGroupListId() {
-        return groupListId;
+    public Todo() {
     }
 
-    public void setGroupListId(String groupListId) {
-        this.groupListId = groupListId;
+    public Todo(String name, boolean completed, Tabla tabla) {
+        this.name = name;
+        this.completed = completed;
+        this.tabla = tabla;
     }
 
     public Long getId() {

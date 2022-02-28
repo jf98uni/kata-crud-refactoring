@@ -5,6 +5,8 @@ import co.com.sofka.crud.models.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
@@ -19,7 +21,12 @@ public class TodoController {
     
     @PostMapping(value = "api/todo")
     public Todo save(@RequestBody Todo todo){
-        return service.save(todo);
+        if (todo.getName() != null) {
+            return service.save(todo);
+        }
+        else {
+            throw new RuntimeException("Escriba el nombre de la tarea");
+        }
     }
 
     @PutMapping(value = "api/todo")
@@ -27,8 +34,9 @@ public class TodoController {
         if(todo.getId() != null){
             return service.save(todo);
         }
+        {
         throw new RuntimeException("No existe el id para actualziar");
-    }
+    }}
 
     @DeleteMapping(value = "api/{id}/todo")
     public void delete(@PathVariable("id")Long id){
@@ -36,7 +44,7 @@ public class TodoController {
     }
 
     @GetMapping(value = "api/{id}/todo")
-    public Todo get(@PathVariable("id") Long id){
+    public Optional<Todo> get(@PathVariable("id") Long id){
         return service.get(id);
     }
 

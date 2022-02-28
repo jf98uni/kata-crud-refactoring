@@ -3,12 +3,16 @@ import React, { useContext, useRef, useState,createContext } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table,Buttom } from 'reactstrap';
 const HOST_API = "http://localhost:8080/api";
+
+
 const Form = ({Store}) => {
     
     const formRef = useRef(null);
     const { dispatch, state: { todo } } = useContext(Store);
     const item = todo.item;
     const [state, setState] = useState(item);
+
+    
   
     const onAdd = (event) => {
       event.preventDefault();
@@ -73,6 +77,8 @@ const Form = ({Store}) => {
       {item.id && <button onClick={onEdit}>Actualizar</button>}
       {!item.id && <button onClick={onAdd} className = "bg-success">Crear</button>}
     </form>
+    
+   
   }
 
   

@@ -11,10 +11,6 @@ public class Tabla {
     private Long id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "todo_id")
-    private Todo todo;
-
     public Tabla() {
     }
 

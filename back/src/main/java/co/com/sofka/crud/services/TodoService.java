@@ -5,6 +5,8 @@ import co.com.sofka.crud.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TodoService {
 
@@ -20,11 +22,11 @@ public class TodoService {
     }
 
     public void delete(Long id){
-        repository.delete(get(id));
+        repository.deleteById(id);
     }
 
-    public Todo get(Long id){
-         return repository.findById(id).orElseThrow();
+    public Optional<Todo> get(Long id){
+         return repository.findById(id);
     }
 
 }

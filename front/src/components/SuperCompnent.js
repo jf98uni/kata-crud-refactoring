@@ -60,11 +60,11 @@ const StoreProvider = ({ children }) => {
   </div>
   }
   
-function SuperComponent ({title}) {
+function SuperComponent ({title},{tabla}) {
   return <StoreProvider>
       <h4>{title}</h4>
-      <Form Store= {Store} ></Form>
-      <List Store= {Store} />
+      <Form Store= {Store} tabla1={tabla} ></Form>
+      <List Store= {Store}  tabla1={tabla} />
 
   </StoreProvider>
 }

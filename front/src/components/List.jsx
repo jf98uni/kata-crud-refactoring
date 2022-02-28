@@ -8,6 +8,8 @@ const List = ({Store}) => {
     
     const { dispatch, state: { todo } } = useContext(Store);
     const currentList = todo.list;
+
+    
   
     useEffect(() => {
       fetch(HOST_API + "/todos")
@@ -52,6 +54,7 @@ const List = ({Store}) => {
     const decorationDone = {
       textDecoration: 'line-through'
     };
+    
     return <div>
       <table className="table table-hover" >
         <thead>
@@ -63,6 +66,7 @@ const List = ({Store}) => {
         </thead>
         <tbody>
           {currentList.map((todo) => {
+            if(todo.name != null){
             return <tr key={todo.id} style={todo.completed ? decorationDone : {}}>
               <td>{todo.id}</td>
               <td>{todo.name}</td>
@@ -70,10 +74,16 @@ const List = ({Store}) => {
               <td><button onClick={() => onDelete(todo.id)} className = "bg-danger">Eliminar</button></td>
               <td><button onClick={() => onEdit(todo)}>Editar</button></td>
             </tr>
+            }
+            else{
+              return <h1>Ingrese un nombre valido no vacio</h1>
+            }
+
           })}
         </tbody>
       </table>
     </div>
-  }
+    }
+    
 
   export default List

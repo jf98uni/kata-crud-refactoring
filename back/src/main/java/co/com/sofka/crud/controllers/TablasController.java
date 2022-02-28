@@ -2,11 +2,11 @@ package co.com.sofka.crud.controllers;
 
 
 import co.com.sofka.crud.models.Tabla;
-import co.com.sofka.crud.models.Todo;
 import co.com.sofka.crud.services.TablaService;
-import co.com.sofka.crud.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,7 +23,13 @@ public class TablasController {
 
     @PostMapping(value = "api/tabla")
     public Tabla save(@RequestBody Tabla tabla){
-        return service.save(tabla);
+
+        if (tabla.getName() != null) {
+            return service.save(tabla);
+        }
+        else {
+            throw new RuntimeException("Escriba el nombre de la tabla");
+        }
     }
 
     @PutMapping(value = "api/tabla")
@@ -41,7 +47,7 @@ public class TablasController {
     }
 
     @GetMapping(value = "api/{id}/tabla")
-    public Tabla get(@PathVariable("id") Long id){
+    public Optional<Tabla> get(@PathVariable("id") Long id){
         return service.get(id);
     }
 }

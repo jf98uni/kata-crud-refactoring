@@ -1,11 +1,11 @@
 package co.com.sofka.crud.services;
 
 import co.com.sofka.crud.models.Tabla;
-import co.com.sofka.crud.models.Todo;
 import co.com.sofka.crud.repositories.TablaRepository;
-import co.com.sofka.crud.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -23,11 +23,11 @@ public class TablaService {
         }
 
         public void delete(Long id){
-            repository.delete(get(id));
+            repository.deleteById(id);
         }
 
-        public Tabla get(Long id){
-            return repository.findById(id).orElseThrow();
+        public Optional<Tabla> get(Long id){
+            return repository.findById(id);
         }
 
 

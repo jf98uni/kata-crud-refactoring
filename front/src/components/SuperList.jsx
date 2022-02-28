@@ -44,8 +44,13 @@ const List = ({Store}) => {
         <tbody>
           
           {currentList.map((tabla) => {
+            if(tabla.name != null){
             return <tr><td><SuperComponent title = {tabla.name}></SuperComponent>
             <button onClick={() => onDelete(tabla.id)} className = "bg-danger">Eliminar</button></td></tr>
+            }
+            else{
+              return <h1>Ingrese un nombre valido no vacio</h1>
+            }
           })}
         </tbody>  
         
