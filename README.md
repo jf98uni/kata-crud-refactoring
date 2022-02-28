@@ -1,3 +1,9 @@
+reto Juan Felipe Botero
+
+El video se encuentra comprimido en el archivo sustentacion
+
+
+
 # [Problema]
 
 Pueden ver los siguientes videos para poder comprender la base del código fuente dentro de este repositorio. 
